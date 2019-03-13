@@ -1,0 +1,30 @@
+Package: epl
+Title: ExplodeLayout algorithm for network visulization
+Version: 0.0.1.0000
+Authors@R: 
+    person(given = "Tianlong",
+           family = "Chen",
+           role = c("aut", "cre"),
+           email = "tiachen@utmb.edu")
+Description: Using ExplodeLayout algorithm to visualize unipartite or
+    bipartite network. User has to provide two data files, one is the 
+    network file formated as a table; the other should be a nodelist file
+    containing coordinates and cluster, entity and outcome information.
+License: MIT license
+Encoding: UTF-8
+LazyData: true
+Imports:
+    devtools,
+    igraph,
+    spatstat,
+    intergraph,
+    ggplot2,
+    sna,
+    ggrepel,
+    randomcoloR,
+    data.table,
+    png,
+    plotly,
+    shinyjs,
+    shiny
+RoxygenNote: 6.1.1
