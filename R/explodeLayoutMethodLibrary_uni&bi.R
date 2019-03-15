@@ -40,10 +40,10 @@ getOriginalNetworkCoordinates <-function(input, g, userCoords){
 #Returns a cleaned up data frame read from the file.
 #If a row is all zero or has NA in it then its removed
 #If column sum is greater than number of rows then it removed as well
-getDataFrameFromFile <- function(networkfile_name, rvalues){
+getDataFrameFromFile <- function(networkfile, rvalues){
 
-  df  <- read.delim(networkfile_name, sep="\t", row.names=1, check.names = FALSE )
-  #df  <- read.table(networkfile_name, header = F, sep="\t",check.names = FALSE )
+  #df  <- read.delim(networkfile_name, sep="\t", row.names=1, check.names = FALSE )
+  df <- networkfile
 
   #set all na values to zero
   df[is.na(df)] <- 0
@@ -255,10 +255,10 @@ getCentroid <- function(pointsX, pointsY, selectAlgoForCentroids){
 }
 
 ###Extrat coords, outcomes, cluster and entity from nodelist file
-convertNodeListFile <- function(nodelistFile_name, input){
+convertNodeListFile <- function(nodeListData, input){
 
-  nodeListData <-   data.table::fread(nodelistFile_name, sep = "\t", header = TRUE)
-  nodeListData <- as.data.frame(nodeListData)
+  #nodeListData <-   data.table::fread(nodelistFile_name, sep = "\t", header = TRUE)
+  #nodeListData <- as.data.frame(nodeListData)
 
   #if use user coords checked, use FRX and FRY.
   if(input$coordfileCheckBox){
@@ -286,9 +286,9 @@ convertNodeListFile <- function(nodelistFile_name, input){
 
 #This method gets user specified project folder and reads all the data from the files that reside within it.
 #Method expects to get the network file and module file , coordinates file is optional
-getDataFromFile <- function(networkfile_name, modules, rvalues){
+getDataFromFile <- function(networkfile, modules, rvalues){
 
-  df     <- getDataFrameFromFile(networkfile_name, rvalues)
+  df     <- getDataFrameFromFile(networkfile, rvalues)
 
   # groups <- read.delim(modulefile_name,  sep="\t", row.names=1, header=FALSE)
   groups <- as.matrix(modules[,2])

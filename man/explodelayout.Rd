@@ -2,28 +2,50 @@
 % Please edit documentation in R/explodeLayout.R
 \name{explodelayout}
 \alias{explodelayout}
-\title{Test of explodelayout.}
+\title{Layout a network using the ExplodeLayout Algorithm.}
 \usage{
-explodelayout(data_name = "training_sample", labelOn = "no")
+explodelayout(nodelistFile, networkFile, labelOn = "no",
+  data_name = "data")
 }
 \arguments{
-\item{data_name}{the project name.}
+\item{nodelistFile}{a nodelist, which is a dataframe with first column as the name of nodes}
+
+\item{networkFile}{a network, which is a matrix or dataframe with first column as the outcome}
 
 \item{labelOn}{labels of nodes on or not. should be 'yes' or 'no'}
+
+\item{data_name}{name your data so that we know how to name your results files}
 }
 \description{
-'explodelayout' reads in the network and nodelist file,
-layout graphs using the ExplodeLayout algorithm with
-different radius and export the results in the local files.
+The explodelayout function applies the ExplodeLayout Algorithm to help user visuallize
+and analyze their network data.
+}
+\details{
+The explodelayout function takes as input two main files:
+1. A nodelist file which containing the lables, original coordinates,
+outcome (like case or control), entity, and cluster membership for all
+nodes in the network.
+2. A network file which represents the network.
+
+Data Format:
+The nodelist file must be a dataframe with 8 columns, named as 'Label', 'FRX', 'FRY'
+'KKX', 'KKY', 'Outcome', 'Cluster', 'Entity'
+The network file must be a dataframe or matrix. When it's a bipartite network, the column names
+should be the variable names and row names should be the subjects names. When it's unipartite,
+column names and row names are the same. The first column of the network file should be the outcome
+of the nodes.
+
+Please note: the names in the network files MUST be consistent with the names in the network files.
+
+Output: the function will export the layout of network with different radius into 21 png files, which
+includes 1 original layout graph and 20 layout graphs with radius of 0.1, 0.2, ... 1.9, 2.0. The
+corresponding CCS scores of different radius will be saved into a 'statList.dat' file, which would
+enable user to pick the best CCS score graph.
 }
 \examples{
-explodelayout('training_sample', 'no')
+explodelayout(nl1, net1, 'no','sample_data')
 
-User should first create two folders in the current
-working directory. Two folders are named as 'Data'
-and 'Results'. Users should put their network file and
-nodelist file in the 'Data' folder. Output of the
-function will be seen in the results folder.
-
-
+}
+\references{
+\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543384/}
 }

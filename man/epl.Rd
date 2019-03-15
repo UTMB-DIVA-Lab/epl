@@ -4,13 +4,16 @@
 \name{epl}
 \alias{epl}
 \alias{epl-package}
-\title{epl:A package to implement the ExplodeLayout algorithm for networks.}
+\title{\pkg{epl} The R package to implement the ExplodeLayout algorithm for network visuallizatoin.}
 \description{
-The epl package provides one function to apply the ExplodeLayout algorithm
-for network visuallization
+The epl package provide the powerful visuallization tool to help analyze networks.
 }
-\section{explodelayout functions}{
+\details{
+The current version would enable users to apply the ExplodeLayout algorithm to any bipartite
+or unipartite network.
 
-The function takes as input two parameters....
+Users have to prepare their data into particular format before calling the layout function.
+
+In the coming version, the package will integrate more tools such as help user build the required
+format, etc.
 }
-
