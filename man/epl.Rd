@@ -6,14 +6,34 @@
 \alias{epl-package}
 \title{\pkg{epl} The R package to implement the ExplodeLayout algorithm for network visuallizatoin.}
 \description{
-The epl package provide the powerful visuallization tool to help analyze networks.
+This package provides powerful visualization tools for networks based on the ExplodeLayout(EL)
+algorithm.
 }
 \details{
-The current version would enable users to apply the ExplodeLayout algorithm to any bipartite
-or unipartite network.
+Clustering analysis is almost one of the most common ways to analyze biological, social and many
+other types of complex networks today. The EL algorithm is a recent introduced network layout algorithm
+(see referrence paper below) aiming to better visualize and understand the cluster structure of a network.
+The idea is very simple: the EL algorithm would takes as input any initial layout(such as  Fruchterman-Reingold
+and Kamada-Kawai) and then put all clusters onto a imaginary circle. The cluster shape would be maintained during
+the process. Thus the relative positions of vertices inside a cluster won't change. Besides, after moved to
+the circle, user will be able to easily see the connections between different clusters. In this way,
+The EL algorithm also introduced a metric to help determine the size of the imaginary circle.
 
-Users have to prepare their data into particular format before calling the layout function.
+To know the detail of the EL algorithm, please read the reference paper below.
 
-In the coming version, the package will integrate more tools such as help user build the required
-format, etc.
+In this package we offer mainly three functinos: 'dataConvert', 'search' and 'visualize'.
+The 'dataConvert' will help transfer user's data into certain format of data; the 'search'
+will do the calculation to generate new networks layout; and 'visualize' will output the layout plots.
+
+A typical use of the package on user's own data is to first convert the data into particular formats
+using 'dataConvert', then analyze the resulted formatted data using 'search', then visualize the resulted
+networks using 'visualize'.
+
+We do provide test data on our github(\url{https://github.com/UTMB-DIVA-Lab/epl})which is already in the EL favored format. Users can download
+and test it on 'search' and 'visualize'.
+
+For detailed usage, please refer to the documentation of each function.
+}
+\references{
+\url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543384/}
 }

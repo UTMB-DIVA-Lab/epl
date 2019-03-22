@@ -1,6 +1,6 @@
 Package: epl
 Title: ExplodeLayout algorithm for network visulization
-Version: 0.0.2.0000
+Version: 0.0.3.0000
 Authors@R: 
     person(given = "Tianlong",
            family = "Chen",
