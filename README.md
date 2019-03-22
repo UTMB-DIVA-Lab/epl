@@ -1,7 +1,7 @@
 # epl
 R package to implement the ExplodeLayout algorithm.
 
-For test purpose, we currently has provided a 'test_data.RData' file for users to 
+For test purpose, we currently have provided a 'test_data.RData' file for users to 
 download and test. It's a unipartite network containing 115 vertices.
 
 We suggest installing the package in the following way:
