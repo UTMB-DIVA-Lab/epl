@@ -1,35 +1,37 @@
-#'\pkg{epl} The R package to implement the ExplodeLayout algorithm for network visuallizatoin.
+#'\pkg{epl} ExplodeLayout Algorithm.
 #'
-#'This package provides powerful visualization tools for networks based on the ExplodeLayout(EL)
-#'algorithm.
+#'This package provides functions for the ExplodeLayout (EL) algorithm, described in the following
+#'publication: \emph{Bhavnani S.K., Chen, T., Ayyaswamy, A., Visweswaran, S., Bellala, G.} \strong{Enabling Comprehension
+#' of Patient Subgroups and Characteristics in Large Bipartite Networks: Implications for Precision Medicine.}
+#' \emph{Proceedings of AMIA Summit on Translational Bioinformatics (2017).}
 #'
-#'Clustering analysis is almost one of the most common ways to analyze biological, social and many
-#'other types of complex networks today. The EL algorithm is a recent introduced network layout algorithm
-#'(see referrence paper below) aiming to better visualize and understand the cluster structure of a network.
-#'The idea is very simple: the EL algorithm would takes as input any initial layout(such as  Fruchterman-Reingold
-#'and Kamada-Kawai) and then put all clusters onto a imaginary circle. The cluster shape would be maintained during
-#'the process. Thus the relative positions of vertices inside a cluster won't change. Besides, after moved to
-#'the circle, user will be able to easily see the connections between different clusters. In this way,
-# the EL algorithm enables user to analyze inter- and intra- cluster relationship of vertices.
-#'The EL algorithm also introduced a metric to help determine the size of the imaginary circle.
+#'Motivation: Despite strong and significant clustering, many networks look like "hairballs" when visualized
+#'using standard layout algorithms such as Kamada Kawai and Fruchterman Rheingold. The ExplodeLayout algorithm
+#'addresses this problem by separating given clusters using the analogy of an explode layout drawing utilized
+#'to understand complex assemblies in mechanical engineering.
 #'
-#'To know the detail of the EL algorithm, please read the reference paper below.
+#'Overview of the EL Algorithm: The EL algorithm takes as input (1) the network data (unipartite or bipartite),
+#'(2) node cluster membership (generated from a cluster algorithm such as modularity, or hierarchical clustering),
+#'and (3) node layout coordinates (generated from a layout algorithm such as Kamada-Kawai and Fruchterman-Reingold).
+#'The algorithm uses the above input to calculate the centroid of each cluster, and moves all nodes in a cluster
+#'radially outward such that the centroid is incident to a given circle, and the distances of the nodes to their
+#'respective centroid are preserved. Because this movement alters the rotation of the clusters relative to the original
+#'layout, the clusters are rotated to match their original orientation. The algorithm generates the radius of the
+#'circle through a search, which optimizes the ratio of the overlap of the bounding boxes defining each cluster, to
+#'the bounding box defining the entire network. The algorithm uses this optimal explode layout radius to generate a
+#'range of layouts in its close vicinity, and displays the network by connecting the nodes based on the inputted network.
+#'The EL algorithm has a computational complexity of n.
 #'
-#'In this package we offer mainly three functinos: 'dataConvert', 'search' and 'visualize'.
-#'The 'dataConvert' will help transfer user's data into certain format of data; the 'search'
-#'will do the calculation to generate new networks layout; and 'visualize' will output the layout plots.
+#'The algorithm provides parameters that enable the user to (1) input data without layout coordinates and to instruct
+#'EL to generate those coordinates using a standard layout algorithm, (2) modify default methods for generating the
+#'centroid, exploded coordinates, and range of circle radiuses, and (3) modify how the network is visualized.
 #'
-#'A typical use of the package on user's own data is to first convert the data into particular formats
-#'using 'dataConvert', then analyze the resulted formatted data using 'search', then visualize the resulted
-#'networks using 'visualize'.
+#'#The EL package provides three functions: (1) 'dataConvert' converts user's network data into a format required by EL,
+#'(2) 'search' generates a range of exploded network layouts, and (3) 'visualize' generates visualizations of the
+#'exploded network layouts.
 #'
-#'We do provide test data on our github(\url{https://github.com/UTMB-DIVA-Lab/epl})which is already in the EL favored format. Users can download
-#'and test it on 'search' and 'visualize'.
-#'
-#'For detailed usage, please refer to the documentation of each function.
-#'
-#'
-#'@references \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543384/}
+#'A sample dataset in the EL input format can be obtained from {https://github.com/UTMB-DIVA-Lab/epl}) Full documentation
+#' can be obtained from: \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543384/}
 #'
 #'@docType package
 #'@name epl

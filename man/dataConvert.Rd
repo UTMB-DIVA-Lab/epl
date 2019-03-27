@@ -2,27 +2,52 @@
 % Please edit documentation in R/dataConvert.R
 \name{dataConvert}
 \alias{dataConvert}
-\title{Converting data into format used for the ExplodeLayout(EL) Algorithm}
+\title{Function to convert data into the format required by the ExplodeLayout (EL) algorithm}
 \usage{
 dataConvert(net_matrix, cluster, outcome, entity)
 }
 \arguments{
-\item{net_matrix}{a numeric matrix or dataframe storing the network as adjacency matrix(for unipartite networks)
-or incidence matrix(for bipartite networks). It would be great if you have vertices names contained.}
+\item{net_matrix}{A numeric matrix or dataframe storing the network as (bi)adjacency matrix, row and column names
+within the data is recommended}
 
-\item{cluster}{a numeric vector containing the cluster membership for each vertices. Make sure the length
+\item{cluster}{A numeric vector containing the cluster membership for each nodes. Make sure the length
 matches the data matrix file.}
 
-\item{outcome}{a numeric vector containing the outcome for each vertice(such as 1 for cases and 2 for controls)}
+\item{outcome}{A numeric vector containing the outcome for each vertice, length should be the same
+as 'cluster'}
 
-\item{entity}{a numeric vector representing the entity for each vertice (if it's unipartite, put all 1, if its'
-bipartite network, put one type vertice as 1, the other as 2)}
+\item{entity}{A numeric vector representing the entity for each vertice , length should be the same as 'cluster'
+and 'outcome'.}
 }
 \description{
-This function takes user's data, including the adjacency or incidence matrix representing networks,
-and vectors containing information of the vertices' cluster membership, entity, etc.
+This function takes (1) a matrix representing networks, (2) cluster membership, (3) outcome  and (4)
+entity of each node (i.e. type of each node. In a bipartite network, 1 for the first type and 2 for the
+other. In a unipartite network, all nodes has entity value of 1.)
 }
 \details{
-The output of the data would be a list containing two dataframes, 'nodelist' and 'net', which would
-serve as the input of the next 'search' step for EL algorithm.
+Input:
+
+(1) The input network matrix is an adjacency matrix for a unipartite network or biadjacency for a
+bipartite network. (see definition of adjacency matrix from wikipedia:\url{https://en.wikipedia.org/wiki/Adjacency_matrix}.)
+
+(2) Cluster membership is an integer vector which has the length equal to the number of nodes in the
+network. Each element in this vector represents the cluster that the corresponding node belongs to.
+
+(3) The outcome is an integer vector with the same length as cluster membership vector. For example, in
+a patient-variable data sets, some patients are selected as cases(unhealthy) and some are
+controls(healthy), then the outcome could be set as 1 for case and 2 for control. If outcome information
+is not provided, it would be set to all 1s by default.
+
+(4) The entity is an integer vector with the same length as cluster membership and outcome. In a
+unipartite network, entity for each node will set as 1. In a bipartite network, entity is 1 for one type of
+nodes and 2 for the other.
+
+Output:
+
+The output of the function would be a list containing two dataframes, 'nodelist' and 'net', which will
+serve as the input for the next 'search' step for EL algorithm. The 'nodelist' contains the following
+information:label names for all nodes (will be set to default as number if not specified in the input
+data); initial coordinates of all nodes using the Fruchterman-Reingold and Kamada-Kawai layout
+algorithms; outcome, cluster membership and entity for each node. The 'net' dataframe
+stores the network.
 }

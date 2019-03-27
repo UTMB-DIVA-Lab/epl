@@ -1,38 +1,44 @@
 #'The 'visualize' step of the ExplodeLayout(EL) algorithm.
 #'
-#'This function takes as input the coordinates file and edgelist file from previous step and visuallize
-#' the networks generated from EL algorithm in saved local graph files.
+#''This function takes as input the (1) coordinate file, and (2) edgelist file for each of the exploded
+#'networks generated from the 'search' function. The visualize function saves the exploded networks in
+#'local folders named by the value of the explode radius (e.g., 2).
 #'
 #'Input:
-#'The input of the visualize function includes mainly two data sets, which should be the output of the
-#'previous 'search' step: 1. A 'coordinates' data containing the coordinates of all vertices in networks
-#'with different radius(a parameter in EL algorithm). The radius range is from 0.1 to 2.0 with step of 0.1.
-#'2. An 'edgelist' file which containing all the edges in the network and their weight.
+#'
+#'(1) A 'coordinates' data object containing the coordinates of all nodes in network with different
+#'radiuses. The default radius range is 0.1 to 2.0, with increments of 0.1.
+#'
+#'(2) An 'edgelist' data object containing all edges connecting pairs of nodes in the network,
+#'and their weight (if the original network is unweighted, the weight of all edges should be 1).
 #'
 #'Please note: This 'visualize' function is designed to visualize networks layouts generated using the
-#'ExplodeLayout algorithm. The input data sets should always be the output of the previous 'search' step.
+#'ExplodeLayout algorithm. Please use the output of the 'search' step as input for the 'visualize' function.
 #'
 #'Output:
-#'This function will generate network of particular radius(between 0.1 and 2.0) or all of them
-#'at once depending on user's need. Plus, the initial layout of the network would always be saved
-#'as a comparison to the 'exploded' networks. User may want to refer to the CCS scores saved in
-#'the 'statList' file generated previously to determine the radius they'd like to set.
 #'
-#'@param coordinatesFile a dataframe containing coordinates of all vertices for networks with radius
+#'The 'visualize' function will generate a network of a particular radius (default between 0.1 - 2.0, at 0.1 increments),
+#'or all of them based on parameters specified by the user. Users may refer to the CCS scores saved in the
+#''statList' file to select a network based on the CCS scores generated from the search algorithm in the
+#''search' function.
+#'
+#'@param coordinatesFile A dataframe containing coordinates of all nodes for networks with radius
 #'ranging from 0.1 to 2.0
-#'@param edgelistFile a datafram containing three columns representing all edges in the network and
-#'their weight
-#'@param projName a string which is the project name or data name specified by user. This name will be used in saved export files.
-#'@param radius a numeric that represents the radius of the network user would like to visualize. It should be
-#'a value in 0.1, 0.2 ... 2.0. If the user wants to output all the possible graphs, set radius equal to 0.
-#'@param nodeSize a numeric represents the size of vertices in the network visualization
-#'@param entityDegree a boolean variable specifying whether the vertice size should reflect its degree(vertice with more edges would be larger
-#'and vice versa)
-#'@param labelSize a numeric represents the size of vertices label. If user prefers not showing the label, set it as 0.
-#'@param edgeThickness a numeric specifying the thickness of edges in the output graphs
-#'@param edgeWeight a boolean variable specifying whether to show the weight of edges. If disabled, all edges in the output graph have the same thickness.
-#'@param clusterColor a boolean variable specifying whether to show clusters using different colors or just give the same color to the whole network
-#'@param picFormat a string specifying the graph file format, currently we support 'png', 'svg', and 'jpeg'
+#'@param edgelistFile A dataframe containing three columns: node-1, node-2, and edgeweight.
+#'@param projName A string specifying the project name used to export files. Default projName = 'defaultName'
+#'@param radius A numeric specifying the radius (ranging from 0.1-2.0) of the ExplodeLayout circle. For all
+#'radius ranging from 0.1-2.0, set radius=0. Default = 3.
+#'@param nodeSize An integer specifying the size of nodes. Default = 3.
+#'@param entityDegree A boolean variable specifying whether the nodes should be sized by its degree (number
+#'of edges connected to that node). Default = FALSE.
+#'@param labelSize An integer specifying the size of the node labels. For no labels, set labelSize=0. Default = 0.
+#'@param edgeThickness A numeric specifying the thickness of edges in the visualization. For weighted networks,
+#'this value will be multiplied by the edge weights provided, to generate the final edge weight. Default = 0.1.
+#'@param edgeWeight A boolean variable specifying whether to display the edge weight (using line thickness) in
+#'weighted networks. If edgeWeight = FALSE, then all edge thicknesses will be equal. Default = FALSE.
+#'@param clusterColor A boolean variable specifying whether to show clusters using different colors or a uniform
+#'color. Default clusterColor = TRUE.
+#'@param picFormat A string specifying the network layout output with values 'png', 'svg', and 'jpeg', Default = 'png'
 #'
 #'
 #'@references \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543384/}
