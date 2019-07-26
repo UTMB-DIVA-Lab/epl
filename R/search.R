@@ -60,7 +60,7 @@
 #'@references \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5543384/}
 #'
 #'@export
-search <- function(nodelistFile, networkFile, projName = 'defaultName', coordfileCheckBox = TRUE,
+search <- function(nodelistFile, networkFile, projName = 'defaultName', coordsProvided = TRUE,
                    initLayout = 'fr', radialOrEquiDist = 'equidist', shiftOrRotate = 'rotate',
                    selectAlgoForCentroids = 'median', rings = 1, output = TRUE) {
   #setting default parameters for explodeLayout
